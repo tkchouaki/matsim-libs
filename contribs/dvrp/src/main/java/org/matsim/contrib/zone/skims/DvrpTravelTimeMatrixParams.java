@@ -62,6 +62,7 @@ public class DvrpTravelTimeMatrixParams extends ReflectiveConfigGroupWithConfigu
 
 	@Parameter
 	@Comment("Caches the travel time matrix data into a binary file. If the file exists, the matrix will be read from the file, if not, the file will be created.")
+	@InputFile(required = false)
 	private String cachePath = null;
 
 	public DvrpTravelTimeMatrixParams() {

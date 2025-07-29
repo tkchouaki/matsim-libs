@@ -157,6 +157,7 @@ public class SimWrapperConfigGroup extends ReflectiveConfigGroup {
 
 		@Parameter
 		@Comment("Shp file that may be used by analysis functions that support shp file input.")
+		@InputFile(required = false)
 		private String shp = null;
 
 		@Parameter

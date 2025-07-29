@@ -39,14 +39,17 @@ public final class NetworkConfigGroup extends ReflectiveConfigGroup {
 	private static final String LANEDEFINITIONSINPUTFILE = "laneDefinitionsFile";
 	private static final String INPUT_CRS = "inputCRS";
 
+	@InputFile(required = false)
 	private String inputFile = null;
 
 	@Deprecated private String inputCRS = null;
 
+	@InputFile(required = false)
 	private String changeEventsInputFile = null;
 
 	private boolean timeVariantNetwork = false;
 
+	@InputFile(required = false)
 	private String laneDefinitionsFile = null;
 
 	public NetworkConfigGroup() {
@@ -89,13 +92,13 @@ public final class NetworkConfigGroup extends ReflectiveConfigGroup {
 	public void setChangeEventsInputFile(final String changeEventsInputFile) {
 		this.changeEventsInputFile = changeEventsInputFile;
 	}
-	
+
 	@StringGetter( CHANGE_EVENTS_INPUT_FILE )
 	public String getChangeEventsInputFile() {
 		return changeEventsInputFile;
 	}
-	
-	
+
+
 	public URL getChangeEventsInputFileUrl(URL context) {
 		return ConfigGroup.getInputFileURL(context, this.changeEventsInputFile);
 	}

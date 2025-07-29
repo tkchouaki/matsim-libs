@@ -20,20 +20,24 @@
 
 package org.matsim.core.config;
 
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.reflect.Field;
+import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 
 import jakarta.validation.Valid;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.matsim.core.api.internal.MatsimExtensionPoint;
+import org.matsim.core.utils.collections.Tuple;
 import org.matsim.core.utils.io.IOUtils;
 
 /**
@@ -100,6 +104,18 @@ public class ConfigGroup implements MatsimExtensionPoint {
 		// default: just call this method on parameter sets
 		for ( Collection<? extends ConfigGroup> sets : getParameterSets().values() ) {
 			for ( ConfigGroup set : sets ) set.checkConsistency(config);
+		}
+
+		for(InputFileItem inputFileItem: getInputFiles(config.getContext())) {
+			if(inputFileItem.isRequired()) {
+				try {
+					if(!Files.exists(Path.of(inputFileItem.inputFilePath.toURI()))) {
+						throw new IllegalArgumentException(String.format("Required file %s not found", inputFileItem.inputFilePath.getPath()));
+					}
+				} catch (URISyntaxException e) {
+					throw new RuntimeException(e);
+				}
+			}
 		}
 	}
 	@Deprecated // please try to use the "typed" access structures.  kai, nov'16
@@ -256,4 +272,121 @@ public class ConfigGroup implements MatsimExtensionPoint {
 		}
 		return IOUtils.extendUrl(context, filename);
 	}
+
+	@Documented
+	@Retention(RetentionPolicy.RUNTIME)
+	public @interface InputFile {
+		/**
+		 * Whether the file is required to run the simulation. If yes, its existence will be checked before the simulation starts
+		 */
+		boolean required() default true;
+	}
+
+	public static class InputFileItem {
+		private final URL inputFilePath;
+		private final boolean required;
+
+		private InputFileItem(URL inputFilePath,boolean required) {
+			this.inputFilePath = inputFilePath;
+			this.required = required;
+		}
+
+		public URL getInputFilePath() {
+			return inputFilePath;
+		}
+
+		public boolean isRequired() {
+			return required;
+		}
+	}
+
+	private Map<Field, Tuple<String, Boolean>> getInputFileFields() {
+		List<Field> allFields = new ArrayList<>();
+		for (Class<?> c = getClass(); c != ConfigGroup.class; c = c.getSuperclass()) {
+			Collections.addAll(allFields, c.getDeclaredFields());
+		}
+		Map<Field, Tuple<String, Boolean>> inputFileFields = new HashMap<>();
+		for(Field field : allFields) {
+			InputFile annotation = field.getAnnotation(InputFile.class);
+			if(annotation == null) continue;
+			assert field.getType().equals(String.class);
+			field.setAccessible(true);
+
+			String value = performWithAccessibleField(field, f -> (String) f.get(this));
+
+			if(annotation.required() && (value == null || value.isEmpty())) {
+				throw new IllegalStateException(String.format("Field %s of %s references an input file that is required. Its value cannot be empty", field.getName(), this.getName()));
+			}
+
+			inputFileFields.put(field, Tuple.of(value, annotation.required()));
+		}
+		return inputFileFields;
+	}
+
+	public List<InputFileItem> getInputFiles(URL context, boolean recursive) {
+
+		List<InputFileItem> items = new ArrayList<>();
+
+		Map<URL, List<Boolean>> inputFilesMap = new HashMap<>();
+
+		Map<Field, Tuple<String, Boolean>> inputFileFields = this.getInputFileFields();
+
+		for(Map.Entry<Field, Tuple<String, Boolean>> entry: inputFileFields.entrySet()) {
+			if(entry.getValue().getFirst() == null || entry.getValue().getFirst().isEmpty()) {
+				continue;
+			}
+			URL fileUrl = getInputFileURL(context, entry.getValue().getFirst());
+			inputFilesMap.computeIfAbsent(fileUrl, key -> new ArrayList<>()).add(entry.getValue().getSecond());
+		}
+
+		for(URL inputFile: inputFilesMap.keySet()) {
+			List<Boolean> required = inputFilesMap.get(inputFile);
+			if(required.size() > 1) {
+				log.warn(String.format("File %s required by more than one parameter within %s", inputFile, this.getName()));
+			}
+			items.add(new InputFileItem(inputFile, required.contains(true)));
+		}
+		return items;
+	}
+
+	private interface FieldMapper<T> {
+		T apply(Field field) throws ReflectiveOperationException;
+	}
+
+	private <T> T performWithAccessibleField(Field field, FieldMapper<T> function) {
+		boolean accessible = field.isAccessible();
+		field.setAccessible(true);
+		T result;
+		try {
+			result = function.apply(field);
+		} catch (ReflectiveOperationException e) {
+			throw new RuntimeException(e);
+		}
+		field.setAccessible(accessible);
+		return result;
+	}
+
+	public void relativizeInputFilePaths(URL context) {
+		Map<Field, Tuple<String, Boolean>> inputFileFields = this.getInputFileFields();
+		for(Map.Entry<Field, Tuple<String, Boolean>> entry: inputFileFields.entrySet()) {
+			if(entry.getValue().getFirst() == null || entry.getValue().getFirst().isEmpty()) {
+				continue;
+			}
+			Path originalPath = Paths.get(entry.getValue().getFirst());
+			if(originalPath.isAbsolute()) {
+				String relativePath;
+				try {
+					relativePath = Paths.get(context.toURI()).getParent().relativize(originalPath).toString();
+				} catch (URISyntaxException e) {
+					throw new RuntimeException(e);
+				}
+
+				this.performWithAccessibleField(entry.getKey(), field -> {
+					field.set(this, relativePath);
+					return null;
+				});
+			}
+		}
+	}
+
 }

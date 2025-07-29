@@ -39,6 +39,7 @@ public class CliquesConfigGroup extends ConfigGroup {
 	private static final String FILE = "inputCliquesFile";
 
 	//parameter values
+	@InputFile
 	private String file;
 
 	public CliquesConfigGroup() {
@@ -55,7 +56,7 @@ public class CliquesConfigGroup extends ConfigGroup {
 	public void addParam(String param_name, String value) {
 		// emulate previous behavior of reader (ignore null values at reading). td Apr'15
 		if ( "null".equalsIgnoreCase( value ) ) return;
-	
+
 		log.debug("addParam called for cliques: param_name="+param_name+", value="+value);
 		if (param_name.equals(FILE)) {
 			log.debug("file field detected");

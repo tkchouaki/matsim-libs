@@ -88,6 +88,7 @@ public class DrtConfigGroup extends ReflectiveConfigGroupWithConfigurableParamet
 
 	@Parameter
 	@Comment("Caches the travel time matrix data into a binary file. If the file exists, the matrix will be read from the file, if not, the file will be created.")
+	@InputFile(required = false)
 	private String travelTimeMatrixCachePath = null;
 
 	@Parameter
@@ -204,17 +205,20 @@ public class DrtConfigGroup extends ReflectiveConfigGroupWithConfigurableParamet
 			+ " If not provided, the vehicle specifications will be created from matsim vehicle file or provided via a custom binding."
 			+ " See FleetModule.")
 	@Nullable//it is possible to generate a FleetSpecification (instead of reading it from a file)
+	@InputFile(required = false)
 	private String vehiclesFile = null;
 
 	@Parameter
 	@Comment("Stop locations file (transit schedule format, but without lines) for DRT stops. "
 			+ "Used only for the stopbased mode")
 	@Nullable
+	@InputFile(required = false)
 	private String transitStopFile = null; // only for stopbased DRT scheme
 
 	@Parameter
 	@Comment("Allows to configure a service area per drt mode. Used with serviceArea Operational Scheme")
 	@Nullable
+	@InputFile(required = false)
 	private String drtServiceAreaShapeFile = null; // only for serviceAreaBased DRT scheme
 
 	@Parameter("writeDetailedCustomerStats")

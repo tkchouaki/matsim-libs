@@ -31,14 +31,17 @@ public class FreightCarriersConfigGroup extends ReflectiveConfigGroup {
 
     public static final String GROUPNAME="freightCarriers" ;
 
+	@InputFile(required = false)
     private String carriersFile;
     static final String CARRIERS_FILE = "carriersFile";
     private static final String CARRIERS_FILE_DESC = "Freight Carriers File, according to MATSim freight contrib";
 
+	@InputFile(required = false)
     private String carriersVehicleTypesFile;
     static final String CARRIERS_VEHICLE_TYPE = "carriersVehicleTypeFile";
     private static final String CARRIERS_VEHICLE_TYPE_DESC = "Carrier Vehicle Types file, according to MATSim freight contrib";
 
+	@InputFile(required = false)
     private String vehicleRoutingAlgorithmFile;
     static final String VEHICLE_ROUTING_ALGORITHM = "vehicleRoutingAlgorithmFile";
     private static final String VEHICLE_ROUTING_ALGORITHM_DESC = "(Optional) Vehicle Routing Algorithm File, according to jsprit library. "

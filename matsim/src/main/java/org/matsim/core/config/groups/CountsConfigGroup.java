@@ -46,11 +46,11 @@ public final class CountsConfigGroup extends ReflectiveConfigGroup {
 	private static final String ANALYZEDMODES = "analyzedModes";
 	private static final String FILTERMODES = "filterModes";
 	private static final String INPUT_CRS = "inputCRS";
-	
+
 	private String outputFormat = "txt";
 
 	/**
-	 * the distance filter in [length unit defined by coordinates] 
+	 * the distance filter in [length unit defined by coordinates]
 	 */
 	private Double distanceFilter;
 
@@ -62,12 +62,13 @@ public final class CountsConfigGroup extends ReflectiveConfigGroup {
 	/**
 	 * the path to the file with the counts
 	 */
+	@InputFile(required = false)
 	private String inputFile = null;
 	/**
 	 * the scaling for the counts
 	 */
 	private double countsScaleFactor = 1.0;
-	
+
 	private int writeCountsInterval = 10;
 	private int averageCountsOverIterations = 5;
 
@@ -88,7 +89,7 @@ public final class CountsConfigGroup extends ReflectiveConfigGroup {
 	public static final String COUNTSINPUTFILENAME_COMMENT = "input file name to counts package" ;
 	public static final String COUNTSSCALEFACTOR_COMMENT = "factor by which to re-scale the simulated values.  necessary when "
 		+ "simulation runs with something different from 100%.  needs to be adapted manually" ;
-	
+
 	@Override
 	public Map<String, String> getComments() {
 		Map<String, String> comments = super.getComments();
@@ -169,42 +170,42 @@ public final class CountsConfigGroup extends ReflectiveConfigGroup {
 	public void setCountsScaleFactor(final double countsScaleFactor) {
 		this.countsScaleFactor = countsScaleFactor;
 	}
-	
+
 	@StringGetter( WRITECOUNTSINTERVAL )
 	public int getWriteCountsInterval() {
 		return writeCountsInterval;
 	}
-	
+
 	@StringSetter( WRITECOUNTSINTERVAL )
 	public void setWriteCountsInterval(int writeCountsInterval) {
 		this.writeCountsInterval = writeCountsInterval;
 	}
-	
+
 	@StringGetter( AVERAGECOUNTSOVERITERATIONS )
 	public int getAverageCountsOverIterations() {
 		return averageCountsOverIterations;
 	}
-	
+
 	@StringSetter( AVERAGECOUNTSOVERITERATIONS )
 	public void setAverageCountsOverIterations(int averageCountsOverIterations) {
 		this.averageCountsOverIterations = averageCountsOverIterations;
 	}
-	
+
 	@StringGetter( FILTERMODES )
 	public boolean isFilterModes() {
 		return this.filterModes;
 	}
-	
+
 	@StringSetter( FILTERMODES )
 	public void setFilterModes(final boolean filterModes) {
 		this.filterModes = filterModes;
 	}
-	
+
 	@StringGetter( ANALYZEDMODES )
 	public String getAnalyzedModes() {
 		return this.analyzedModes;
 	}
-	
+
 	@StringSetter( ANALYZEDMODES )
 	public void setAnalyzedModes(final String analyzedModes) {
 		this.analyzedModes = analyzedModes.toLowerCase(Locale.ROOT);

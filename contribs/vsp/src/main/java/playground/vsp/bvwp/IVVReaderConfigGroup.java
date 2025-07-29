@@ -26,41 +26,49 @@ import org.matsim.core.config.ReflectiveConfigGroup;
  */
 public class IVVReaderConfigGroup extends ReflectiveConfigGroup {
 	public static final String GROUP_NAME = "IVVReaderConfigGroup" ;
-	
+
 	// ---
 	// 00
 	/*package*/static final String DEMAND_FILE = "demandMatrixFile" ;
+	@InputFile
 	private String demandMatrixFile ;
-	
+
 	// 01
 	/*package*/static final String REMAINING_DEMAND_FILE = "remainingDemandMatrixFile" ;
+	@InputFile
 	private String demandRemainingMatrixFile ;
-	
+
 	// 03
 	/*package*/static final String NEW_DEMAND_FILE = "newDemandMatrixFile" ;
+	@InputFile
 	private String demandNewMatrixFile ;
-	
+
 	// 04
 	/*package*/static final String DROPPED_DEMAND_FILE = "droppedDemandMatrixFile" ;
+	@InputFile
 	private String demandDroppedMatrixFile ;
 
 	// 06
 	/*package*/static final String TRAVEL_TIMES_BASE_FILE = "travelTimesBaseCaseMatrixFile" ;
+	@InputFile
 	private String travelTimesBaseMatrixFile ;
-	
+
 	// 07
 	/*package*/static final String TRAVEL_TIMES_STUDY_FILE = "travelTimesStudyMatrixFile" ;
+	@InputFile
 	private String travelTimesStudyMatrixFile ;
-	
+
 	// 06 - 15
 	/*package*/static final String IMPEDANCE_FILE = "impedanceMatrixFile" ;
+	@InputFile
 	private String impedanceMatrixFile ;
-	
+
 	// 16
 	/*package*/static final String IMPEDANCE_SHIFTED_FILE = "impedanceShiftedMatrixFile" ;
+	@InputFile
 	private String impedanceShiftedMatrixFile ;
 	// ---
-	
+
 	/**
 	 * @param name
 	 */
@@ -75,7 +83,7 @@ public class IVVReaderConfigGroup extends ReflectiveConfigGroup {
 	public IVVReaderConfigGroup( boolean storeUnknownParametersAsStrings) {
 		super(GROUP_NAME, storeUnknownParametersAsStrings);
 	}
-	
+
 	@StringGetter(TRAVEL_TIMES_BASE_FILE)
 	public String getTravelTimesBaseMatrixFile() {
 		return travelTimesBaseMatrixFile;

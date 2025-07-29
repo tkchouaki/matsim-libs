@@ -14,6 +14,7 @@ public class OperationFacilitiesParams extends ReflectiveConfigGroupWithConfigur
 
 	@Parameter
 	@Comment("path to operation facility xml")
+	@InputFile(required = false)
 	private String operationFacilityInputFile;
 
 	public OperationFacilitiesParams() {

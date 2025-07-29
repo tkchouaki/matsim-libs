@@ -27,15 +27,16 @@ import org.matsim.core.config.ReflectiveConfigGroup;
 public final class VehiclesConfigGroup extends ReflectiveConfigGroup {
 
 	public static final String GROUP_NAME = "vehicles" ;
-	
+
 	private static final String INPUT_FILE = "vehiclesFile" ;
 
+	@InputFile(required = false)
 	private String inputFile = null ;
 
 	public VehiclesConfigGroup() {
 		super( GROUP_NAME );
 	}
-	
+
 	@StringSetter(INPUT_FILE)
 	public final void setVehiclesFile( String str ) {
 		this.inputFile = str ;
@@ -44,6 +45,6 @@ public final class VehiclesConfigGroup extends ReflectiveConfigGroup {
 	public final String getVehiclesFile() {
 		return this.inputFile ;
 	}
-	
+
 
 }

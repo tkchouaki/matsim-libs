@@ -38,6 +38,7 @@ public class PRConfigGroup extends ConfigGroup{
 	private static final String INTERMODAL_TRANSFER_PENALTY = "intermodalTransferPenalty";
 	private static final String TYPICAL_DURATION = "typicalDuration";
 
+	@InputFile
 	private String inputFile = null;
 	private double gravity = 2;
 	private double intermodalTransferPenalty = 0.;

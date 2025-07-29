@@ -25,6 +25,7 @@ public class ShiftsParams extends ReflectiveConfigGroupWithConfigurableParameter
 
 	@Parameter
 	@Comment("path to shift xml")
+	@InputFile(required = false)
 	private String shiftInputFile;
 
 	@Parameter

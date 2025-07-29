@@ -38,7 +38,7 @@ public final class SignalSystemsConfigGroup extends ReflectiveConfigGroup {
 	public static final String USE_AMBER_TIMES = "useAmbertimes";
 	public static final String AMBERTIMES_FILE = "ambertimes";
 	public static final String CONFLICTING_DIRECTIONS_FILE = "conflictingDirections";
-	public static final String INTERSECTION_LOGIC = "intersectionLogic"; 
+	public static final String INTERSECTION_LOGIC = "intersectionLogic";
 	public static final String INTERGREENTIMES_FILE = "intergreentimes";
 	public static final String USE_INTERGREEN_TIMES = "useIntergreentimes";
 	public static final String ACTION_ON_INTERGREEN_VIOLATION = "actionOnIntergreenViolation";
@@ -49,19 +49,25 @@ public final class SignalSystemsConfigGroup extends ReflectiveConfigGroup {
 	public enum IntersectionLogic{
 		/* vehicles drive through each other at intersections */
 		NONE,
-		/* vehicles still drive through each other, but data about conflicting directions is stored 
+		/* vehicles still drive through each other, but data about conflicting directions is stored
 		 * e.g. for possible signal phase combinations */
 		CONFLICTING_DIRECTIONS_NO_TURN_RESTRICTIONS,
-		/* data about conflicting directions is used to forbid turns when oncoming traffic 
+		/* data about conflicting directions is used to forbid turns when oncoming traffic
 		 * (from directions with right of way) is approaching */
 		CONFLICTING_DIRECTIONS_AND_TURN_RESTRICTIONS
 	}
 
+	@InputFile(required = false)
 	private String signalSystemFile;
+	@InputFile(required = false)
 	private String signalControlFile;
+	@InputFile(required = false)
 	private String signalGroupsFile;
+	@InputFile(required = false)
 	private String amberTimesFile;
+	@InputFile(required = false)
 	private String intergreenTimesFile;
+	@InputFile(required = false)
 	private String conflictingDirectionsFile;
 	private boolean useIntergreens = false;
 	private boolean useAmbertimes = false;
@@ -69,7 +75,7 @@ public final class SignalSystemsConfigGroup extends ReflectiveConfigGroup {
 	private IntersectionLogic intersectionLogic = IntersectionLogic.NONE;
 	private ActionOnSignalSpecsViolation actionOnIntergreenViolation = ActionOnSignalSpecsViolation.WARN;
 	private ActionOnSignalSpecsViolation actionOnConflictingDirectionViolation = ActionOnSignalSpecsViolation.WARN;
-	
+
 	public SignalSystemsConfigGroup() {
 		super(GROUP_NAME);
 	}
@@ -96,7 +102,7 @@ public final class SignalSystemsConfigGroup extends ReflectiveConfigGroup {
 	public String getSignalGroupsFile() {
 		return this.signalGroupsFile;
 	}
-	
+
 	@StringSetter( SIGNALGROUPS_FILE )
 	public void setSignalGroupsFile(String signalGroupsFile){
 		this.signalGroupsFile = signalGroupsFile;
@@ -106,17 +112,17 @@ public final class SignalSystemsConfigGroup extends ReflectiveConfigGroup {
 	public String getAmberTimesFile() {
 		return this.amberTimesFile;
 	}
-	
+
 	@StringSetter( AMBERTIMES_FILE )
 	public void setAmberTimesFile(String amberTimesFile){
 		this.amberTimesFile = amberTimesFile;
 	}
-	
+
 	@StringGetter( INTERGREENTIMES_FILE )
 	public String getIntergreenTimesFile() {
 		return intergreenTimesFile;
 	}
-	
+
 	@StringSetter( INTERGREENTIMES_FILE )
 	public void setIntergreenTimesFile(String intergreenTimesFile) {
 		this.intergreenTimesFile = intergreenTimesFile;
@@ -126,17 +132,17 @@ public final class SignalSystemsConfigGroup extends ReflectiveConfigGroup {
 	public String getSignalControlFile() {
 		return this.signalControlFile;
 	}
-	
+
 	@StringSetter( SIGNALCONTROL_FILE )
 	public void setSignalControlFile(String signalControlFile){
 		this.signalControlFile = signalControlFile;
 	}
-	
+
 	@StringGetter( CONFLICTING_DIRECTIONS_FILE )
 	public String getConflictingDirectionsFile() {
 		return this.conflictingDirectionsFile;
 	}
-	
+
 	@StringSetter( CONFLICTING_DIRECTIONS_FILE )
 	public void setConflictingDirectionsFile(String conflictingDirectionsFile){
 		this.conflictingDirectionsFile = conflictingDirectionsFile;
@@ -146,12 +152,12 @@ public final class SignalSystemsConfigGroup extends ReflectiveConfigGroup {
 	public boolean isUseIntergreenTimes() {
 		return this.useIntergreens;
 	}
-	
+
 	@StringSetter( USE_INTERGREEN_TIMES )
 	public void setUseIntergreenTimes(boolean useIntergreens){
 		this.useIntergreens = useIntergreens;
 	}
-	
+
 	@StringGetter( ACTION_ON_INTERGREEN_VIOLATION )
 	public ActionOnSignalSpecsViolation getActionOnIntergreenViolation() {
 		return actionOnIntergreenViolation;
@@ -167,11 +173,11 @@ public final class SignalSystemsConfigGroup extends ReflectiveConfigGroup {
 			break;
 		// throw an exception if the value is not supported
 		default:
-			throw new IllegalArgumentException("The value " + actionOnIntergreenViolation 
+			throw new IllegalArgumentException("The value " + actionOnIntergreenViolation
 					+ " for key : " + ACTION_ON_INTERGREEN_VIOLATION + " is not supported by this config group");
 		}
 	}
-	
+
 	@StringGetter( ACTION_ON_CONFLICTING_DIRECTION_VIOLATION )
 	public ActionOnSignalSpecsViolation getActionOnConflictingDirectionViolation() {
 		return actionOnConflictingDirectionViolation;
@@ -187,16 +193,16 @@ public final class SignalSystemsConfigGroup extends ReflectiveConfigGroup {
 			break;
 		// throw an exception if the value is not supported
 		default:
-			throw new IllegalArgumentException("The value " + actionOnConflictingDirectionViolation 
+			throw new IllegalArgumentException("The value " + actionOnConflictingDirectionViolation
 					+ " for key : " + ACTION_ON_CONFLICTING_DIRECTION_VIOLATION + " is not supported by this config group");
 		}
 	}
-	
+
 	@StringGetter( USE_AMBER_TIMES )
 	public boolean isUseAmbertimes() {
 		return useAmbertimes;
 	}
-	
+
 	@StringSetter( USE_AMBER_TIMES )
 	public void setUseAmbertimes(boolean useAmbertimes) {
 		this.useAmbertimes = useAmbertimes;
@@ -211,7 +217,7 @@ public final class SignalSystemsConfigGroup extends ReflectiveConfigGroup {
 	public void setUseSignalSystems(final boolean useSignalSystems) {
 		this.useSignalSystems = useSignalSystems;
 	}
-	
+
 	@StringGetter( INTERSECTION_LOGIC )
 	public IntersectionLogic getIntersectionLogic() {
 		return intersectionLogic;

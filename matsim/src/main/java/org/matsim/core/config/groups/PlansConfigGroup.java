@@ -59,6 +59,7 @@ public final class PlansConfigGroup extends ReflectiveConfigGroup {
 //	private static final String SUBPOPULATION_ATTRIBUTE = "subpopulationAttributeName";
 	private static final String INPUT_CRS = "inputCRS";
 
+	@InputFile
 	private String inputFile = null;
 	private String networkRouteType = NetworkRouteType.LinkNetworkRoute;
 	private String inputPersonAttributeFile = null;

@@ -6,12 +6,16 @@ public class CarsharingVehicleRelocationConfigGroup extends ReflectiveConfigGrou
 
 	public static final String GROUP_NAME = "CarsharingVehicleRelocation";
 
+	@InputFile
 	private String relocationZonesInputFile = null;
 
+	@InputFile
 	private String relocationTimesInputFile = null;
 
+	@InputFile
 	private String relocationAgentsInputFile = null;
 
+	@InputFile
 	private Integer moduleEnableAfterIteration = null;
 
 	private Integer demandEstimateIterations = null;

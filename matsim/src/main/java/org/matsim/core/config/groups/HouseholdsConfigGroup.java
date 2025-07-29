@@ -42,7 +42,9 @@ public final class HouseholdsConfigGroup extends ReflectiveConfigGroup {
 			"insistingOnUsingDeprecatedFacilityAttributeFile to true.  The file will then be read, but the values " +
 			"will be entered into each facility using Attributable, and written as such to output_facilities.";
 
+	@InputFile(required = false)
 	private String inputFile = null;
+	@InputFile(required = false)
 	private String inputHouseholdAttributesFile = null;
 	private boolean insistingOnUsingDeprecatedAttributeFile = false;
 
@@ -51,7 +53,7 @@ public final class HouseholdsConfigGroup extends ReflectiveConfigGroup {
 	}
 
 	/* direct access */
-	
+
 	@StringGetter( INPUT_FILE )
 	public String getInputFile() {
 		return this.inputFile;
@@ -64,7 +66,7 @@ public final class HouseholdsConfigGroup extends ReflectiveConfigGroup {
 	public void setInputFile(final String inputFile) {
 		this.inputFile = inputFile;
 	}
-	
+
 	@StringGetter( INPUT_HOUSEHOLD_ATTRIBUTES_FILE )
 	public String getInputHouseholdAttributesFile() {
 		return this.inputHouseholdAttributesFile;

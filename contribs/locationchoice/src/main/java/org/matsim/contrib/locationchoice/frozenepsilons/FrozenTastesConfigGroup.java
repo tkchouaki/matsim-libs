@@ -44,12 +44,12 @@ public class FrozenTastesConfigGroup extends ReflectiveConfigGroup implements De
 	private static final String CENTER_NODE = "centerNode";
 	private static final String RADIUS = "radius";
 	private static final String FLEXIBLE_TYPES = "flexible_types";
-	
+
 	private static final String ALGO = "algorithm";
 	private static final String TT_APPROX_LEVEL = "tt_approximationLevel";
 	private static final String MAXDISTANCEDCSCORE = "maxDistanceDCScore";
 	private static final String PLANSELECTOR = "planSelector";
-	
+
 	private static final String RANDOMSEED = "randomSeed";
 	private static final String EPSDISTR = "epsilonDistribution";
 	private static final String SCALE_EPS = "epsilonScaleFactors";
@@ -60,11 +60,11 @@ public class FrozenTastesConfigGroup extends ReflectiveConfigGroup implements De
 	private static final String FATTRS_FILE = "fAttributesFileName";
 	private static final String MAXDCS_FILE = "maxDCScoreFile";
 	private static final String PREFS_FILE = "prefsFile";
-	
+
 	private static final String ANALYSIS_BOUNDARY = "analysisBoundary";
 	private static final String ANALYSIS_BINSIZE = "analysisBinSize";
 	private static final String IDEXCLUSION = "idExclusion";
-	
+
 	private static final String DESTINATIONSAMPLE_PCT = "destinationSamplePercent";
 
 	private static final String USE_CONFIG_PARAMS_FOR_SCORING = "useConfigParamsForScoring";
@@ -77,27 +77,33 @@ public class FrozenTastesConfigGroup extends ReflectiveConfigGroup implements De
 	private String centerNode = null;
 	private Double radius = null;
 	private String flexible_types = "null";	// TODO !!
-	
+
 	private Algotype algorithm = Algotype.bestResponse;
 	private ApproximationLevel tt_approximationLevel = ApproximationLevel.localRouting;
 	private double maxDistanceDCScore = -1.0;
 	private String planSelector = "SelectExpBeta";
-	
+
 	private long randomSeed = 221177;
 	private EpsilonDistributionTypes epsilonDistribution = EpsilonDistributionTypes.gumbel;
 	private String epsilonScaleFactors = null;
+	@InputFile(required = false)
 	private String pkValuesFile = null;
+	@InputFile(required = false)
 	private String fkValuesFile = null;
+	@InputFile(required = false)
 	private String pBetasFile = null;
+	@InputFile(required = false)
 	private String fAttributesFile = null;
+	@InputFile(required = false)
 	private String maxDCScoreFile = null;
+	@InputFile(required = false)
 	private String prefsFile = null;
-	
+
 	private double analysisBoundary = 200000;
 	private double analysisBinSize = 20000;
 	private Long idExclusion = null;
 	private double destinationSamplePercent = 100.0;
-	
+
 	/* experimental stuff */
 	private boolean useConfigParamsForScoring = true;
 	private boolean useIndividualScoringParameters = true;
@@ -105,7 +111,7 @@ public class FrozenTastesConfigGroup extends ReflectiveConfigGroup implements De
 	public FrozenTastesConfigGroup() {
 		super(GROUP_NAME);
 	}
-	
+
 	@Override
 	public final Map<String, String> getComments() {
 		Map<String,String> map = super.getComments();

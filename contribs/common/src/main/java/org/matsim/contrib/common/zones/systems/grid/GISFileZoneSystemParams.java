@@ -20,6 +20,7 @@ public class GISFileZoneSystemParams extends ZoneSystemParams {
 	@Parameter
 	@Comment("allows to configure zones based on a GIS file")
 	@Nullable
+	@InputFile
 	private String zonesShapeFile = null;
 
 	@Override

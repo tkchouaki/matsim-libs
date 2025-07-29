@@ -38,6 +38,7 @@ public final class FacilitiesConfigGroup extends ReflectiveConfigGroup {
 	private static final String INPUT_CRS = "inputCRS";
 	private static final String INSISTING_ON_USING_DEPRECATED_ATTRIBUTE_FILE = "insistingOnUsingDeprecatedFacilitiesAttributeFile" ;
 
+	@InputFile(required = false)
 	private String inputFile = null;
 	private String inputFacilitiesAttributesFile = null;
 	private String inputCRS = null;

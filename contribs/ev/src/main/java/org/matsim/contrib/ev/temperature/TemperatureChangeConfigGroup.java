@@ -33,6 +33,7 @@ public final class TemperatureChangeConfigGroup extends ReflectiveConfigGroup {
 	@Parameter
 	@Comment("Filename containing temperature changes. Expects CSV file with time;linkId;newTemperature")
 	@NotNull
+	@InputFile
 	public String temperatureChangeFile;
 
 	@Parameter

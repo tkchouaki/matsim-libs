@@ -35,15 +35,19 @@ public final class EmissionsConfigGroup extends ReflectiveConfigGroup {
 	public static final String GROUP_NAME = "emissions";
 
 	private static final String EMISSION_FACTORS_WARM_FILE_AVERAGE = "averageFleetWarmEmissionFactorsFile";
+	@InputFile
 	private String averageFleetWarmEmissionFactorsFile = null;
 
 	private static final String EMISSION_FACTORS_COLD_FILE_AVERAGE = "averageFleetColdEmissionFactorsFile";
+	@InputFile
 	private String averageFleetColdEmissionFactorsFile = null;
 
 	private static final String EMISSION_FACTORS_WARM_FILE_DETAILED = "detailedWarmEmissionFactorsFile" ;
+	@InputFile
 	private String detailedWarmEmissionFactorsFile = null;
 
 	private static final String EMISSION_FACTORS_COLD_FILE_DETAILED = "detailedColdEmissionFactorsFile";
+	@InputFile
 	private String detailedColdEmissionFactorsFile;
 
 	private static final String WRITING_EMISSIONS_EVENTS = "isWritingEmissionsEvents";

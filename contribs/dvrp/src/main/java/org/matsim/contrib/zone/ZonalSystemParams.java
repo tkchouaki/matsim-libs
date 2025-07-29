@@ -31,11 +31,13 @@ public final class ZonalSystemParams extends ReflectiveConfigGroup {
 	@Parameter
 	@Comment("An XML file specifying the zonal system")
 	@NotBlank
+	@InputFile
 	private String zonesXmlFile;
 
 	@Parameter
 	@Comment("A shape file specifying the geometries of zones")
 	@NotBlank
+	@InputFile
 	private String zonesShpFile;
 
 	@Parameter

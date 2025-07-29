@@ -11,12 +11,13 @@ import org.matsim.contribs.discrete_mode_choice.components.constraints.ShapeFile
 
 /**
  * Config group for the ShapeFileConstraint.
- * 
+ *
  * @author sebhoerl
  *
  */
 public class ShapeFileConstraintConfigGroup extends ComponentConfigGroup {
 	private Requirement requirement = Requirement.BOTH;
+	@InputFile
 	private String path = null;
 	private Collection<String> constrainedModes = new HashSet<>();
 

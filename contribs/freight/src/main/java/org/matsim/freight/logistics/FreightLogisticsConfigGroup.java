@@ -30,6 +30,7 @@ public class FreightLogisticsConfigGroup extends ReflectiveConfigGroup {
 
     public static final String GROUPNAME="freightLogistics" ;
 
+	@InputFile
     private String lspsFile;
     static final String LSPS_FILE = "lspsFile";
     private static final String LSPS_FILE_DESC = "Freight LogisticsServiceProviders (LSP)s File, according to MATSim logistics extension as part of MATSim's freight contrib.";

@@ -144,6 +144,7 @@ public final class NoiseConfigGroup extends ReflectiveConfigGroup {
 
 	private boolean considerNoiseBarriers = false;
 	private boolean considerNoiseReflection = false;
+	@InputFile(required = false)
 	private String noiseBarriersFilePath = null;
 	private String noiseBarriersSourceCrs = null;
 

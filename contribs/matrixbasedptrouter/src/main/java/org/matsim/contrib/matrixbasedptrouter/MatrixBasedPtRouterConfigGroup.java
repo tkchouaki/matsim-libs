@@ -18,7 +18,7 @@
  * *********************************************************************** */
 
 /**
- * 
+ *
  */
 package org.matsim.contrib.matrixbasedptrouter;
 
@@ -43,8 +43,11 @@ public final class MatrixBasedPtRouterConfigGroup extends ReflectiveConfigGroup 
 	public static final String PT_TRAVEL_TIMES = "ptTravelTimesFile"; // tnicolai: originally, this was named "ptTravelTimes" in the matsim config. old config files need to be adjusted
 	public static final String PT_TRAVEL_DISTANCES = "ptTravelDistancesFile"; // tnicolai: originally, this was named "ptTravelDistances" in the matsim config. old config files need to be adjusted
 	public static final String PT_TRAVEL_TIMES_AND_DISTANCES_SWITCH = "usingTravelTimesAndDistances"; // tnicolai: originally, this was named "useTravelTimesAndDistances" in the matsim config. old config files need to be adjusted
+	@InputFile(required = false)
 	private String ptStopsInputFile;
+	@InputFile(required = false)
 	private String ptTravelTimesInputFile;
+	@InputFile(required = false)
 	private String ptTravelDistancesInputFile;
 	private boolean usingTravelTimesAndDistances = false ;
 	private boolean usingPtStops = false ;

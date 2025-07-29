@@ -27,6 +27,7 @@ import org.matsim.core.config.ReflectiveConfigGroup;
 public class SocialNetworkConfigGroup extends ReflectiveConfigGroup {
 	public static final String GROUP_NAME = "socialNetwork";
 
+	@InputFile
 	private String inputFile = null;
 
 	public SocialNetworkConfigGroup() {

@@ -59,9 +59,13 @@ public class TransitConfigGroup extends ReflectiveConfigGroup {
 			"insistingOnUsingDeprecatedAttributeFiles to true.  The files will then be read, but the values " +
 			"will be entered into each stop or line using Attributable, and written as such to output_transitSchedule.";
 
+	@InputFile
 	private String transitScheduleFile = null;
+	@InputFile
 	private String vehiclesFile = null;
+	@InputFile(required = false)
 	private String transitLinesAttributesFile = null;
+	@InputFile(required = false)
 	private String transitStopsAttributesFile = null;
 	private String inputScheduleCRS = null;
 

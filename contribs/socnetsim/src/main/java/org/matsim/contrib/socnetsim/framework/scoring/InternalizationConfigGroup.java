@@ -29,6 +29,7 @@ public class InternalizationConfigGroup extends ReflectiveConfigGroup {
 
     public static final String GROUP_NAME = "scoreInternalization";
 
+	@InputFile(required = false)
     private String internalizationSocialNetworkFile = null;
     private double internalizationRatio = 0;
 
